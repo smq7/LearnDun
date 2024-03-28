@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div id="tree"></div>
+
+  <!-- Результат должен быть:
+<div id="tree">
+<ul>
+  <li>Рыбы
+    <ul>
+      <li>форель</li>
+      <li>лосось</li>
+    </ul>
+  </li>
+  <li>Деревья
+    <ul>
+      <li>Огромные
+        <ul>
+          <li>секвойя</li>
+          <li>дуб</li>
+        </ul>
+      </li>
+      <li>Цветковые
+        <ul>
+          <li>яблоня</li>
+          <li>магнолия</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+-->
+
+  <script>
+    let data = {
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
+      },
+
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
+        },
+        "Цветковые": {
+          "яблоня": {},
+          "магнолия": {}
+        }
+      }
+    };
+
+    let i = 0;
+    function CreateTreeRec(cont,data){
+      if(Object.keys(data).length === 1){  
+        return;
+      } else{
+        let place = document.getElementById(cont);
+        let ul = document.createElement('ul');
+        place.append(ul);
+          for( const el in data){
+          i += 1;
+          let li = document.createElement('li');
+          li.textContent = el;
+          li.setAttribute("id", i+el);
+          ul.append(li);
+          CreateTreeRec(i+el,data[el]);
+        }
+      }
+      
+      return
+    }
+    // console.log()
+    CreateTreeRec("tree",data);
+  </script>
+
+</body>
+</html>
